@@ -26,7 +26,7 @@ void add32_have_impl(int x, int y, int z) {
     else {
         x = static_cast<int>(result);
     }
-    printf("%s, 0x%08x, 0x%08x, 0x%08x\n", "s_add.i_i", x, y, z);
+    printf("%s, 0x%08x, 0x%08x, 0x%08x\n", "s_addsat.i_i", x, y, z);
 }
 
 void add32_x86_impl(int x, int y, int z) {
