@@ -2,9 +2,20 @@
 
 using namespace std;
 #define HAVE_ISA
+#define NUM_VEC_LANES 64
+
+template <typename T>
+struct Var {
+    T val;
+    const char *name;
+    Var(const char *name, T val) {
+        this->name = name;
+        this->val = val;
+    }
+};
 
 #define DECLARE_I32(x, val) \
-    int i_##x = val;
+    Var<int> i_##x(#x, val); \
 
 #define ADD_32(x, y, z) \
     add_32_have_impl(i_##x, i_##y, i_##z); \
@@ -24,44 +35,44 @@ using namespace std;
 #define MUL_32(x, y, z) \
     mul32_have_impl(i_##x, i_##y, i_##z);
 
-void lshift_have_impl(int &x, int y, int z) {
-    x = y << z;
-    printf("s_lshift.%d 0x%08x, 0x%08x\n", z, x, y);
+void lshift_have_impl(Var<int> &x, Var<int> y, Var<int> z) {
+    x.val = y.val << z.val;
+    printf("s_lshift.%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
 }
 
-void rshift_have_impl(int &x, int y, int z) {
-    x = y >> z;
-    printf("s_rshift.%d 0x%08x, 0x%08x\n", z, x, y);
+void rshift_have_impl(Var<int> &x, Var<int> y, Var<int> z) {
+    x.val = y.val >> z.val;
+    printf("s_rshift.%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
 }
 
-void mul32_have_impl(int &x, int y, int z) {
-    x = y * z;
-    printf("s_mul.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
+void mul32_have_impl(Var<int> &x, Var<int> y, Var<int> z) {
+    x.val = y.val * z.val;
+    printf("s_mul.i_i, %s=0x%08x, %s=0x%08x, %s=0x%08x\n", x.name, x.val, y.name, y.val, z.name, z.val);
 }
 
-void add_32_imm16_have_impl(int &x, int y, int z) {
-    x = y + static_cast<short>(z);
-    printf("s_add.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
+void add_32_imm16_have_impl(Var<int> &x, Var<int> y, int z) {
+    x.val = y.val + static_cast<short>(z);
+    printf("s_add.i_i, %s=0x%08x, %s=0x%08x, 0x%08x\n", x.name, x.val, y.name, y.val, z);
 }
 
-void add_32_have_impl(int &x, int y, int z) {
-    x = y + z;
-    printf("s_add.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
+void add_32_have_impl(Var<int> &x, Var<int> y, Var<int> z) {
+    x.val = y.val + z.val;
+    printf("s_add.i_i, %s=0x%08x, %s=0x%08x, %s=0x%08x\n", x.name, x.val, y.name, y.val, z.name, z.val);
 }
 
-void add_sat32_have_impl(int &x, int y, int z) {
+void add_sat32_have_impl(Var<int> &x, Var<int> y, Var<int> z) {
     // HAVE SPU implementation, assuming saturation add
-    long long result = static_cast<long long>(y) + static_cast<long long>(z);
+    long long result = static_cast<long long>(y.val) + static_cast<long long>(z.val);
     if(result > INT_MAX) {
-        x = INT_MAX;
+        x.val = INT_MAX;
     }
     else if(result < INT_MIN) {
-        x = INT_MIN;
+        x.val = INT_MIN;
     }
     else {
-        x = static_cast<int>(result);
+        x.val = static_cast<int>(result);
     }
-    printf("s_add_sat.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
+    printf("s_add_sat.i_i, %s=0x%08x, %s=0x%08x, %s=0x%08x\n", x.name, x.val, y.name, y.val, z.name, z.val);
 }
 
 int main(int argc, char *argv[]) {
@@ -72,9 +83,10 @@ int main(int argc, char *argv[]) {
     ADD_SAT32(result, r0, r1)
     ADD_32_IMM16(result, r1, 0x1)
 
-    DECLARE_I32(r2, 2)
-    MUL_32(result, result, r2)
-    RSHIFT(result, result, r2)
-    LSHIFT(result, result, r2)
+    DECLARE_I32(r2, 4)
+    MUL_32(result, r2, r2)
+    RSHIFT(result, r2, r1)
+    LSHIFT(result, r2, r1)
+
     return 0;
 }
