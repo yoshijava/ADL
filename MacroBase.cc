@@ -13,7 +13,6 @@ void add32_have_impl(int x, int y, int z) {
     // HAVE SPU implementation, assuming saturation add
 #ifdef HAVE_ISA
     long long result = static_cast<long long>(y) + static_cast<long long>(z);
-    cout << result << endl;
     if(result > INT_MAX) {
         x = INT_MAX;
     }
