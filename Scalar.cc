@@ -5,13 +5,19 @@
 void lshift_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z)
 {
     x.val = y.val << z.val;
-    printf("s_lshift.%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
+    printf("s_lshift_%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
+}
+
+void lshift_imm16_my_isa_impl(Var<int> &x, Var<int> y, short z)
+{
+    x.val = y.val << z;
+    printf("s_lshift_%d %s=0x%08x, %s=0x%08x\n", z, x.name, x.val, y.name, y.val);
 }
 
 void rshift_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z)
 {
     x.val = y.val >> z.val;
-    printf("s_rshift.%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
+    printf("s_rshift_%d %s=0x%08x, %s=0x%08x\n", z.val, x.name, x.val, y.name, y.val);
 }
 
 void mul32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z)

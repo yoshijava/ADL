@@ -20,5 +20,10 @@ int main(int argc, char *argv[])
     RSHIFT(result, r2, r1)
     LSHIFT(result, r2, r1)
 
+    DECLARE_I32(r3, 1)
+    for(int i=0; i<7; i++) {
+        LSHIFT_IMM16(r3, r3, 1)
+    }
+
     return 0;
 }
