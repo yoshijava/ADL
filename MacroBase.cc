@@ -7,10 +7,10 @@ using namespace std;
     int i_##x = val;
 
 #define ADD32(x, y, z) \
+    i_##x = i_##y + i_##z; \
     add32_impl(i_##x, i_##y, i_##z);
 
 void add32_impl(int x, int y, int z) {
-    x = y + z;
     printf("%s, 0x%08x, 0x%08x, 0x%08x\n", "s_add.i_i", x, y, z);
 }
 
