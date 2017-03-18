@@ -44,12 +44,12 @@ void add_32_imm16_have_impl(int &x, int y, int z) {
     printf("s_add.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
 }
 
-void add_32_have_impl(int &x, int y, int &z) {
+void add_32_have_impl(int &x, int y, int z) {
     x = y + z;
     printf("s_add.i_i, 0x%08x, 0x%08x, 0x%08x\n", x, y, z);
 }
 
-void add_sat32_have_impl(int &x, int y, int &z) {
+void add_sat32_have_impl(int &x, int y, int z) {
     // HAVE SPU implementation, assuming saturation add
     long long result = static_cast<long long>(y) + static_cast<long long>(z);
     if(result > INT_MAX) {
