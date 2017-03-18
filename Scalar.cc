@@ -29,7 +29,7 @@ void mul32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z)
 void add_32_imm16_my_isa_impl(Var<int> &x, Var<int> y, int z)
 {
     x.val = y.val + static_cast<short>(z);
-    printf("s_add.i_i, %s=0x%08x, %s=0x%08x, 0x%08x\n", x.name, x.val, y.name, y.val, z);
+    printf("s_add.i_imm16, %s=0x%08x, %s=0x%08x, 0x%08x\n", x.name, x.val, y.name, y.val, z);
 }
 
 void add_32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z)
