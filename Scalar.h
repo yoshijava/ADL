@@ -30,3 +30,10 @@ struct Var
         this->val = val;
     }
 };
+
+void lshift_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z);
+void rshift_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z);
+void mul32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z);
+void add_32_imm16_my_isa_impl(Var<int> &x, Var<int> y, int z);
+void add_32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z);
+void add_sat32_my_isa_impl(Var<int> &x, Var<int> y, Var<int> z);
