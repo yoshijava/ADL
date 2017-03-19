@@ -1,8 +1,8 @@
 #include <iostream>
 #include "Scalar.h"
-
+#include "Vector.h"
 #define MY_ISA
-#define NUM_VEC_LANES 64
+
 
 using namespace std;
 
@@ -24,6 +24,9 @@ int main(int argc, char *argv[])
     for(int i=0; i<7; i++) {
         LSHIFT_IMM16(r3, r3, 1)
     }
+
+    DECLARE_VEC_I32(v1, 1);
+    LSHIFT_VEC(v1, v1, r1)
 
     return 0;
 }
