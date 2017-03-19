@@ -17,7 +17,8 @@ e.g.,
     cout << "r0 + r1 = " << result << endl;
     
 Output:
-s_add_sat.i_i, result=0x7fffffff, r0=0x7fffffff, r1=0x00000001
-r0 = 2147483647
-r1 = 1
-r0 + r1 = 2147483647
+
+    s_add_sat.i_i, result=0x7fffffff, r0=0x7fffffff, r1=0x00000001
+    r0 = 2147483647
+    r1 = 1
+    r0 + r1 = 2147483647
