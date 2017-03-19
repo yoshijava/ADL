@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
         LSHIFT_IMM16(r3, r3, 1)
     }
 
-    DECLARE_VEC_I32(v1, 1);
+    DECLARE_VEC_I32(v1, 1)
     LSHIFT_VEC(v1, v1, r1)
     cout << "Print vector variable:" << endl;
     cout << "v1 = " << v1 << endl;
@@ -36,6 +36,15 @@ int main(int argc, char *argv[])
     cout << "r0 = " << r0 << endl;
     cout << "r1 = " << r1 << endl;
     cout << "r0 % r1 = " << result << endl;
+
+    DECLARE_VEC_I32(vResult, 0)
+    DECLARE_VEC_I32(v2, 1)
+    DECLARE_VEC_I32(v3, 2)
+    vResult = v2 % v3;
+    cout << "v2 = " << v2 << endl;
+    cout << "v3 = " << v3 << endl;
+    cout << "v2 % v3 = ";
+    cout << vResult << endl;
 
     return 0;
 }

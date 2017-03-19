@@ -39,7 +39,7 @@ public:
     }
 
     // saturation add, defined as 
-    inline friend Var<T> operator%(Var<T> &lhs, const Var<T> &rhs)
+    inline friend Var<T> operator%(Var<T> lhs, const Var<T> rhs)
     {
         Var<T> result("result", 0);
         add_32_sat_my_isa_impl(result, lhs, rhs);

@@ -26,6 +26,13 @@ public:
         }
     }
 
+    inline friend Var_v<T> operator%(Var_v<T> lhs, const Var_v<T> rhs)
+    {
+        Var_v<T> result("result", 0);
+        add_32_vec_sat_my_isa_impl(result, lhs, rhs);
+        return result;
+    }
+
     inline friend std::ostream& operator<<(std::ostream& os, const Var_v<T> &obj)
     {
         os << "[";
@@ -37,5 +44,6 @@ public:
     }
 };
 
+void add_32_vec_sat_my_isa_impl(Var_v<int> &x, Var_v<int> y, Var_v<int> z);
 void lshift_v_my_isa_impl(Var_v<int> &x, Var_v<int> y, Var<int> z);
 #endif
