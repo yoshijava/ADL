@@ -24,6 +24,7 @@ Output:
     r0 + r1 = 2147483647
 
 Example: Saturation add Fibonacci sequence
+
     void sample2_fibonacci_with_saturation_add()
     {
         DECLARE_I32(r1, 1)
@@ -40,6 +41,7 @@ Example: Saturation add Fibonacci sequence
     }
     
 Output:
+
     s_add_sat.i_i, result=0x00000002, r1=0x00000001, r2=0x00000001
     Value = 2
     s_add_sat.i_i, result=0x00000003, r2=0x00000001, result=0x00000002
